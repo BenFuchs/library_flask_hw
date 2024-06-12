@@ -8,6 +8,7 @@
 {% endblock %}
 {% block content %}
 <a href="/">ADD BOOK PAGE</a>
+<a href="/loanBook">LOAN BOOK PAGE</a>
 
   <form action="/addClient" method="post">
     <label for="cName">Enter client name</label>
@@ -19,9 +20,30 @@
     <input type="submit" value="submit">
   </form>
 
-  <ol>
-    {% for client in clients %}
-    <li>{{client[0]}} - {{client[1]}} - {{client[2]}} - {{client[3]}}</li>
-    {% endfor %}
-  </ol>
+  <table>
+    <thead>
+        <tr>
+            <th>Index</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+         {% for item in clients %}
+         <tr>
+            <td><button onclick="delUser('{{ item[0] }}')">{{ item[0] }}</button></td>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+         </tr>
+         {% endfor %}
+    </tbody>
+</table>
+<script>
+  const delUser=(id)=> {
+     console.log(`/delUser${id}`)
+     axios.delete(`/delUser${id}`).then(res => console.log(res.data))
+  }
+</script>
 {% endblock %}

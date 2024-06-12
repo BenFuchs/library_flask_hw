@@ -24,10 +24,10 @@ Dedicated pages for each action, with links to either the main menu or relevant 
 - [ ] Home page with a list of all possible actions for the user
 - [ ] Log in functionality
 - [X] Page to add a book
-- [ ] Page to remove a book
-- [ ] Page to remove a client
+- [X] Page to remove a book
+- [X] Page to remove a client
 - [X] Page to add a client
-- [ ] Page to loan a book
+- [WIP] Page to loan a book
 - [ ] Page to return a book
 - [ ] Page to show all books
 - [ ] Page to show all clients

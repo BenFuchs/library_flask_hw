@@ -8,6 +8,7 @@
 {% endblock %}
 {% block content %}
 <a href="/addClient">ADD CLIENT PAGE</a>
+<a href="/loanBook">LOAN BOOK PAGE</a>
 
   <form action="/" method="post">
     <label for="bName">Enter book name</label>
@@ -34,16 +35,29 @@
     <tbody>
          {% for item in data %}
          <tr>
-            <td>{{ item[0] }}</td>
+            <td><button onclick="temp('{{ item[0] }}')">{{ item[0] }}</button></td>
             <td>{{ item[1] }}</td>
             <td>{{ item[2] }}</td>
             <td>{{ item[3] }}</td>
-            <td>{{ item[4] }}</td>
+            <td>
+              <form action="/loanBook/{{ item[0] }}" method="post" style="display:inline;">
+                <button type="submit">LOAN</button>
+            </form>
+            </td>
          </tr>
          {% endfor %}
     </tbody>
 </table>
 
 <script>
-</script>
+  const temp=(id)=> {
+    console.log(`/delBook${id}`)
+    axios.delete(`/delBook${id}`).then(res => console.log(res.data))
+  }
+
+  const loan=()=> {
+    console.log("temp")
+    
+  }
+    </script>
 {% endblock %}

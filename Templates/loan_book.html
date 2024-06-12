@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Loan Book{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+<a href="/">ADD BOOK PAGE</a>
+<a href="/addClient">ADD CLIENT PAGE</a>
+<h1>LOAN PAGE</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Index</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Loan</th>
+        </tr>
+    </thead>
+    <tbody>
+         {% for item in books %}
+         <tr>
+            <td>
+                <form action="/loanBook/{{ item[0] }}" method="post" style="display:inline;">
+                    <button type="submit">LOAN - {{ item[0] }}</button>
+                </form>
+            </td>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+            <td>{{ item[4] }}</td>
+         </tr>
+         {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
