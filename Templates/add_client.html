@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+<a href="/">ADD BOOK PAGE</a>
+
+  <form action="/addClient" method="post">
+    <label for="cName">Enter client name</label>
+    <input type="text" name="cName" id="cName"><br>
+    <label for="cAge">Enter client age</label>
+    <input type="text" name="cAge" id="cAge"><br>
+    <label for="cCity">Enter client city</label>
+    <input type="text" name="cCity" id="cCity"><br>
+    <input type="submit" value="submit">
+  </form>
+
+  <ol>
+    {% for client in clients %}
+    <li>{{client[0]}} - {{client[1]}} - {{client[2]}} - {{client[3]}}</li>
+    {% endfor %}
+  </ol>
+{% endblock %}

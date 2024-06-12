@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+<a href="/addClient">ADD CLIENT PAGE</a>
+
+  <form action="/" method="post">
+    <label for="bName">Enter book name</label>
+    <input type="text" name="bName" id="bName"><br>
+    <label for="bAuthor">Enter author name</label>
+    <input type="text" name="bAuthor" id="bAuthor"><br>
+    <label for="bYear">Enter published year</label>
+    <input type="text" name="bYear" id="bYear"><br>
+    <label for="bLoan">Enter loan type</label>
+    <input type="text" name="bLoan" id="bLoan"><br>
+    <input type="submit" value="submit">
+  </form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Index</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Loan</th>
+        </tr>
+    </thead>
+    <tbody>
+         {% for item in data %}
+         <tr>
+            <td>{{ item[0] }}</td>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+            <td>{{ item[4] }}</td>
+         </tr>
+         {% endfor %}
+    </tbody>
+</table>
+
+<script>
+</script>
+{% endblock %}
