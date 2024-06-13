@@ -7,7 +7,7 @@
   </style>
 {% endblock %}
 {% block content %}
-<a href="/">ADD BOOK PAGE</a>
+<a href="/addBook">ADD BOOK PAGE</a>
 <a href="/addClient">ADD CLIENT PAGE</a>
 <h1>LOAN PAGE</h1>
 <table>
@@ -24,8 +24,8 @@
          {% for item in books %}
          <tr>
             <td>
-                <form action="/loanBook/{{ item[0] }}" method="post" style="display:inline;">
-                    <button type="submit">LOAN - {{ item[0] }}</button>
+                <form action="/returnBook/{{ item[0] }}" method="post" style="display:inline;">
+                    <button type="submit">Return - {{ item[0] }}</button>
                 </form>
             </td>
             <td>{{ item[1] }}</td>

@@ -7,8 +7,8 @@
   </style>
 {% endblock %}
 {% block content %}
-<a href="/">ADD BOOK PAGE</a>
-<a href="/loanBook">LOAN BOOK PAGE</a>
+<a href="/addBook">ADD BOOK PAGE</a>
+<a href="/loanBook1">LOAN BOOK PAGE</a>
 
   <form action="/addClient" method="post">
     <label for="cName">Enter client name</label>
@@ -40,10 +40,12 @@
          {% endfor %}
     </tbody>
 </table>
+
 <script>
   const delUser=(id)=> {
      console.log(`/delUser${id}`)
      axios.delete(`/delUser${id}`).then(res => console.log(res.data))
   }
+
 </script>
 {% endblock %}

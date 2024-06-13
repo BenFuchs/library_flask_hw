@@ -27,8 +27,8 @@ Dedicated pages for each action, with links to either the main menu or relevant 
 - [X] Page to remove a book
 - [X] Page to remove a client
 - [X] Page to add a client
-- [WIP] Page to loan a book
-- [ ] Page to return a book
+- [X] Page to loan a book
+- [X] Page to return a book
 - [ ] Page to show all books
 - [ ] Page to show all clients
 - [ ] Links on each action page to the main menu and relevant pages
