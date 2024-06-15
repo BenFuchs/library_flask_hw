@@ -8,6 +8,18 @@
     {% endblock %}
   </head>
   <body>
+    <header>
+      <h1>Library Management System</h1>
+      {% if show_links %}
+      <nav>
+        <ul>
+          <li><a href="/addClient">ADD CLIENT PAGE</a></li>
+          <li><a href="/loanBook/1">LOAN BOOK PAGE</a></li>
+          <li><a href="/addBook">ADD BOOK PAGE</a></li>
+        </ul>
+      </nav>
+      {% endif %}
+    </header>
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="footer">
       {% block footer %}
@@ -15,8 +27,7 @@
       {% endblock %}
     </div>
     <form action="/logout" method="get">
-    <button type="submit">Log Out</button>
+      <button type="submit">Log Out</button>
     </form>
-</form>
   </body>
 </html>

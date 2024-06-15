@@ -1,5 +1,6 @@
 import sqlite3
 from flask import Flask, redirect, render_template, request, url_for
+import datetime
 
 api = Flask(__name__)
 
@@ -11,7 +12,7 @@ cur.execute("CREATE TABLE IF NOT EXISTS clients(Name TEXT, Age INT, City TEXT, L
 cur.execute("CREATE TABLE IF NOT EXISTS loans(BookID INT, ClientID INT, LoanDate, Active INT)")
 
 @api.route('/addBook', methods=['POST', 'GET'])
-def addBook():
+def add_book():
     if request.method == 'POST':
         bName = request.form['bName']
         bAuthor = request.form['bAuthor']
@@ -23,7 +24,7 @@ def addBook():
         print(bName, bAuthor, bYear, bLoan)
     
     res = cur.execute("SELECT ROWID, * FROM books WHERE Active = 1").fetchall()
-    return render_template('index.html', data=res)
+    return render_template('index.html', data=res, show_links=True)
 
 @api.route('/addClient', methods=['POST', 'GET'])
 def add_client():
@@ -34,9 +35,10 @@ def add_client():
 
         cur.execute("INSERT INTO clients(Name, Age, City) Values (?, ?, ?)", (cName, cAge, cCity))
         con.commit()
+        return redirect(url_for('log_in'))
 
     clients = cur.execute("SELECT ROWID, * FROM clients").fetchall()
-    return render_template('add_client.html', clients = clients)
+    return render_template('add_client.html', clients = clients, show_links = False)
 
 @api.route('/delBook<int:id>', methods=['DELETE'])
 def del_book(id):
@@ -76,7 +78,7 @@ def loanBook(id):
     
     books = cur.execute("SELECT ROWID, * FROM books WHERE Active = 0").fetchall()
     print("Loan", id)
-    return render_template('loan_book.html', books=books)
+    return render_template('loan_book.html', books=books, show_links = True)
 
 @api.route('/returnBook/<int:id>', methods=['GET', 'POST'])
 def returnBook(id):
@@ -88,27 +90,25 @@ def returnBook(id):
         return render_template('loan_book.html', books=books)
     
     books = cur.execute("SELECT ROWID, * FROM books WHERE Active = 0").fetchall()
-    return render_template('loan_book.html', books=books)
+    return render_template('loan_book.html', books=books, show_links = True)
 
 @api.route('/', methods=['POST', 'GET'])
 def log_in():
     if request.method == 'POST':
-        user_name = request.form.get('user')
-        print("Form data:", request.form)  # Debugging line
+        user_name = request.form["user"]
         try:
             cur.execute("SELECT * FROM clients WHERE Name = ?", (user_name,))
             client = cur.fetchone()
-            print("Client fetched:", client)  # Debugging line
             if client:
                 cur.execute("UPDATE clients SET Logged_in = 1 WHERE Name = ?", (user_name,))
                 con.commit()
-                return redirect(url_for('addBook'))
+                return redirect(url_for('add_book'))
             else:
-                return render_template('login_page.html', message="User not found")
+                return render_template('login_page.html', message="User not found", show_links=False)
         except Exception as e:
             print("Error:", e)
-            return render_template('login_page.html', message="An error occurred")
-    return render_template('login_page.html')
+            return render_template('login_page.html', message="An error occurred", show_links=False)
+    return render_template('login_page.html', show_links=False)
 
 @api.route('/logout')
 def logout():
